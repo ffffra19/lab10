@@ -66,7 +66,7 @@ public final class LambdaUtilities {
         /*
          * Suggestion: consider Optional.filter
          */
-        List<Optional<T>> result = new ArrayList<>(list.size() * 2);
+        final List<Optional<T>> result = new ArrayList<>(list.size() * 2);
         list.forEach(t -> {
             result.add(Optional.ofNullable(t).filter(pre));
         });
@@ -91,9 +91,9 @@ public final class LambdaUtilities {
         /*
          * Suggestion: consider Map.merge
          */
-        Map<R, Set<T>> groupedMap = new HashMap<>();
+        final Map<R, Set<T>> groupedMap = new HashMap<>();
         list.forEach(t -> {
-            groupedMap.merge(op.apply(t), new HashSet<>(Set.of(t)), (s,m) -> {
+            groupedMap.merge(op.apply(t), new HashSet<>(Set.of(t)), (s, m) -> {
                 s.addAll(m);
                 return s;
             });
@@ -121,9 +121,9 @@ public final class LambdaUtilities {
          *
          * Keep in mind that a map can be iterated through its forEach method
          */
-        Map<K,V> filledMap = new HashMap<>();
-        map.forEach((k,v) -> {
-            Optional<V> currentElement = v;
+        final Map<K, V> filledMap = new HashMap<>();
+        map.forEach((k, v) -> {
+            final Optional<V> currentElement = v;
             filledMap.put(k, currentElement.orElse(def.get()));
         });
         return filledMap;
